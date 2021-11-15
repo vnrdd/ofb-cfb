@@ -1,3 +1,4 @@
+import random
 from copy import copy
 
 def image_to_bytes(image) -> list:
@@ -41,3 +42,11 @@ def update_init(block, gamma) -> bytes:
     block += gamma
     
     return block
+
+def corrupt(bytes_array, count) -> bytes:
+    bytes_array = bytearray(bytes_array)
+    
+    for i in range(count):
+        bytes_array[i] = random.randint(0, 255)
+        
+    return bytes(bytes_array)

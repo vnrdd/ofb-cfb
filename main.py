@@ -12,15 +12,7 @@ if __name__ == '__main__':
     
     image_in_bytes = image_to_bytes(source_image)
     
-    image_in_bytes = bytearray(image_in_bytes)
-    image_in_bytes[0] = 255
-    image_in_bytes[1] = 0
-    image_in_bytes[2] = 0
-    # image_in_bytes[3] = 255
-    # image_in_bytes[4] = 255
-    # image_in_bytes[5] = 255
-    
-    image_in_bytes = bytes(image_in_bytes)
+    image_in_bytes = corrupt(image_in_bytes, 3)
     
     encrypted = cfb.decrypt(image_in_bytes, BLOCK_SIZE=BLOCK_SIZE)
         
