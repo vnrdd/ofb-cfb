@@ -1,5 +1,9 @@
 import random
+from bitstring import BitArray
 from copy import copy
+from prettytable import PrettyTable
+
+init = bytes([random.randint(0, 255) for _ in range(0, 8)])
 
 def image_to_bytes(image) -> list:
     W = image.width
@@ -50,3 +54,19 @@ def corrupt(bytes_array, count) -> bytes:
         bytes_array[i] = random.randint(0, 255)
         
     return bytes(bytes_array)
+
+def output(source, enc, dec, count):
+    table = PrettyTable()
+    table.field_names = ['Byte num', 'Source', 'Encrypted', 'Decrypted', 'Status']
+      
+    for i in range(count):
+        byte1 = BitArray(uint=source[i], length=8).bin
+        byte2 = BitArray(uint=enc[i], length=8).bin
+        byte3 = BitArray(uint=dec[i], length=8).bin
+        
+        table.add_row([i, byte1, byte2, byte3, get_status(byte1, byte3)])
+        
+    print(table)
+        
+def get_status(value1, value2) -> str:
+    return 'ok' if value1 == value2 else 'error'

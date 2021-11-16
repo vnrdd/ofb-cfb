@@ -1,9 +1,8 @@
-import random
 from bfish import *
 from util import *
 
 def encrypt(bytes_array, BLOCK_SIZE) -> bytes:
-    init_block = bytes([random.randint(0, 255) for _ in range(0, 8)])
+    init_block = copy(init)
     result = []
     
     for i in range(0, len(bytes_array), BLOCK_SIZE):
@@ -21,7 +20,7 @@ def encrypt(bytes_array, BLOCK_SIZE) -> bytes:
     return bytes(result)
 
 def decrypt(bytes_array, BLOCK_SIZE) -> bytes:
-    init_block = bytes([random.randint(0, 255) for _ in range(0, 8)])
+    init_block = copy(init)
     result = []
     
     for i in range(0, len(bytes_array), BLOCK_SIZE):

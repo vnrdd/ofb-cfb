@@ -1,9 +1,9 @@
-import random
+from copy import copy
 from bfish import *
 from util import *
 
 def OFB(bytes_array, BLOCK_SIZE) -> bytes:
-    init_block = bytes([random.randint(0, 255) for _ in range(0, 8)])
+    init_block = copy(init)
     result = []
     
     for i in range(0, len(bytes_array), BLOCK_SIZE):
